@@ -1,0 +1,62 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2580
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww27940\viewh18980\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \
+\
+APIs:\
+\
+create_url(key, url, customMessage=None)\
+\
+delete_url(key)\
+\
+read_url( key )\
+\
+\
+\
+Database SQL : \
+\
+URL : \ul short_URL,\ulnone  Long_Url, User_ID\
+\
+User: User_ID\
+\
+\
+\
+\
+\
+Encoding (Base 36 : Alphanumeric 26+10)\
+\
+\
+Cache: LRU  -> LinkedHashMap : \
+\
+\
+\
+\
+\
+\
+\
+Class Node \{\
+	char data;\
+	Node next[26];\
+	boolean eow;\
+	Node(char c) \{\
+		this.data = c;\
+		for(int I = 0; I < 26; I++ ) \{\
+			this.next[I] =null;\
+		\}\
+	\}\
+\}\
+\
+\
+Class Trie \{\
+	Trie () \{\
+		Node root = new Node(\'93/\'93);\
+	\}\
+\
+	void insertWord(String word) \{\
+		\
+		node.eow = true;\
+	\}}

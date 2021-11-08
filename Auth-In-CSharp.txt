@@ -1,0 +1,39 @@
+namespace Namespace {
+    
+    using System.Collections.Generic;
+    
+    using System.Linq;
+    
+    public static class Module {
+        
+        public static object numberOfTokens(object expiryLimit, object commands) {
+            // Write your code here
+            var values = new Dictionary<object, object>();
+            var time = 0;
+            foreach (var c in commands) {
+                //  extraction values
+                var action = c[0];
+                var token_id = c[1];
+                time = c[2];
+                //  set token
+                if (action == 0) {
+                    values[token_id] = expiryLimit + time;
+                } else if (action == 1) {
+                    //  reset token
+                    // check if token exists
+                    if (values.keys().Contains(token_id)) {
+                        var expiry_time = values.get(token_id);
+                        if (expiry_time >= time) {
+                            values[token_id] = values.get(token_id) + expiryLimit - (expiry_time - time);
+                        }
+                    }
+                }
+            }
+            // counting values alive after reading all the values
+            var count = (from i in values.values()
+                where i >= time
+                select 1).Sum();
+            return count;
+        }
+    }
+}

@@ -1,0 +1,142 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2580
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 /*\
+ * Click `Run` to execute the snippet below!\
+ */\
+\
+import java.io.*;\
+import java.util.*;\
+\
+/*\
+ * To execute Java, please define "static void main" on a class\
+ * named Solution.\
+ *\
+ * If you need more classes, simply define them inline.\
+\
+P0,P1,P2,P3,P4\
+A, B, C\
+\
+max =        [[7,5,3],[3,2,2],[9,0,2],[2,2,2],[4,3,3]]\
+allocation = [[0,1,0],[2,0,0],[3,0,2],[2,1,1],[0,0,2]]\
+NeededRes =  [[7,4,3],[1,2,2],[6,0,0],[0,1,1],[4,3,2]]\
+\
+available = [3,3,2] \
+\
+NeededRes =  [2,2,2] - [2,1,1] > Avai\
+\
+Process Start:\
+max - allocation < Available\
+\
+Process\
+Available = Available + max\
+\
+P4         ->      P3>...\
+\
+Safe Sequence\
+*/\
+\
+class Process \{\
+   \
+\}\
+\
+class Schedular \{\
+  \
+  operator < ();\
+  operator > ();\
+  \
+  operator - (int [a,b,c]);\
+  \
+  operator - (int [a,b,c]);\
+  \
+  def schedule() \{\
+    \
+    \
+    Queue<Process> processes = new Queue<Process>();\
+    int numProcesses = processes.size();\
+    \
+    \
+    Queue<Resource> resouces = new Queue<Resource>();\
+    int numResoueces = resouces.size();\
+    \
+    \
+    int[][] neededResource = new int[numProcesses][numResoueces] ;\
+    for( int i = 0 ; i < numProcesses; i++) \{\
+      neededResource[i] = max[i] - allocation[i];\
+    \}\
+    \
+    Queue<Process> q = new Queue<Process>();\
+    while( numProcesses > 0) \{\
+      for(int i = 0 ; i < numProcesses; i++) \{\
+        if( neededResource[i ] < available[i] ) \{\
+          q.add(process[i]);\
+          available = available - neededResource[i];\
+          \
+          process.remove(process[i]);\
+          numProcesses--;\
+\
+          break;\
+        \}\
+      \}\
+      available = available + max[i];\
+    \}\
+    \
+    return q;\
+  \
+\}\
+  \
+  \
+  \
+  \
+  \
+  \
+  \
+  \
+class MyLinkedHashmap extends HashMap \{\
+  LinkedList<Integer> ll = new LinkedList<>();\
+  \
+  HashMap<String,Integer> map = new HashMap<>();\
+  int pos = 0;\
+  \
+  @Override\
+  put()\
+  remove()\
+  \
+  \
+  void insert(String key, int value) \{\
+    ll.insert(key);\
+    pos++;\
+    super().put(key,value);\
+  \}\
+  \
+  void remove() \{\
+  \}\
+  \
+  void getValues() \{\
+    for\
+  \}\
+\}\
+\
+  \
+  \
+  \
+  \
+  \
+  \
+  \
+  \
+  \
+  \
+  \
+  \
+  \
+  \
+  \
+  \
+  \
+  \
+  }

@@ -1,0 +1,101 @@
+
+Exotic Cars Inc is a peculiar car dealership. The peculiarity of this dealership is that they have created a maze and arranged the cars in the maze in such a way that at a time you can only see one car. You have three options for each car. You either like it and buy it or you move down a path that is either on the left or right side of the current car. The critieria for liking a car is that it should be closest to your budget. The dealership guarantees that the car on the left is costlier than the current one and the car on the right is cheaper than the current one.\
+  \
+You are looking to buy a new car. You have a budget k and you are slightly flexible towards going above the budget but are ready to go slightly under as long as the value is closest to your budget k.\
+  \
+Your task is that you need to come up with a program where you need to find a car that will be closest or equal to your budget k given the entry point to the dealership\'92s maze.\
+  \
+  \
+Example:\
+\
+For the following maze, the values of the car at each node in crores are\
+A - 5\
+B - 8\
+C - 10\
+D - 6\
+E - 2\
+F - 4\
+G - 1\
+            C\
+        B\
+    D\
+        \
+A\
+        F\
+    E\
+        G\
+        \
+You have a budget of 7 crores.\
+  \
+The answer to this scenario is - D.\
+*/\
+\
+import java.io.*;\
+import java.util.*;\
+\
+/*\
+ * To execute Java, please define "static void main" on a class\
+ * named Solution.\
+ *\
+ * If you need more classes, simply define them inline.\
+ */\
+class Node \{\
+  char name;\
+  int val;\
+  Node left;\
+  Node right;\
+  Node(char name, int v) \{\
+    this.val = v;\
+    this.name = name;\
+    this.left = null;\
+    this.right = null;\
+  \}\
+\}\
+\
+class Solution \{\
+  public static int budgetDiff(Node root, int budget) \{\
+    return Math.abs(root.val - budget);\
+  \}\
+  \
+  public static Node findMyCar(Node root, int budget) \{\
+    //Modify the function prototype as required and implement the logic here.\
+    if(root == null) \{\
+      return null;\
+    \}\
+    Node resultCar = root;\
+    Node iter = resultCar;\
+    int myCar = budgetDiff(root, budget);\
+    while(iter != null && iter.left != null && iter.right != null)\{\
+      if(budget > iter.val) \{\
+        iter = iter.left;\
+      \} else \{\
+        iter = iter.right;\
+      \}\
+      int tmpMyCar = budgetDiff(iter, budget);\
+      System.out.println("Bud:" + tmpMyCar + "Name:" +  iter.name +"Val:" + iter.val);\
+      if(tmpMyCar <= myCar) \{\
+          myCar = tmpMyCar;\
+          resultCar = iter;\
+      \}\
+    \}\
+    return resultCar;\
+  \}\
+  \
+  public static void main(String[] args) \{\
+    Node root = new Node('A',5);\
+    root.left = new Node('D',6);\
+    root.left.left = new Node('B',8);\
+    root.left.left.left = new Node('C',10);\
+    root.right = new Node('E',2);\
+    root.right.left = new Node('F',4);\
+    root.right.right = new Node('G',1);\
+    \
+    int budget = 3;\
+    Node myCar = findMyCar(root, budget);\
+    if(myCar == null) \{\
+      System.out.println("No car found");\
+      return;\
+    \}\
+    System.out.println("My car in my budget " + budget + " is " + myCar.name );\
+  \}\
+\}}

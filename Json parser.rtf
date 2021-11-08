@@ -1,0 +1,80 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2580
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red22\green107\blue41;\red255\green255\blue254;\red0\green0\blue0;
+\red0\green0\blue255;\red144\green1\blue18;}
+{\*\expandedcolortbl;;\cssrgb\c7451\c48627\c21176;\cssrgb\c100000\c100000\c99608;\cssrgb\c0\c0\c0;
+\cssrgb\c0\c0\c100000;\cssrgb\c63922\c8235\c8235;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\sl460\partightenfactor0
+
+\f0\fs30 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 #!/bin/python3\cf4 \cb1 \strokec4 \
+\
+\pard\pardeftab720\sl460\partightenfactor0
+\cf5 \cb3 \strokec5 import\cf4 \strokec4 \'a0math\cb1 \
+\cf5 \cb3 \strokec5 import\cf4 \strokec4 \'a0os\cb1 \
+\cf5 \cb3 \strokec5 import\cf4 \strokec4 \'a0random\cb1 \
+\cf5 \cb3 \strokec5 import\cf4 \strokec4 \'a0re\cb1 \
+\cf5 \cb3 \strokec5 import\cf4 \strokec4 \'a0sys\cb1 \
+\
+\
+\pard\pardeftab720\sl460\partightenfactor0
+\cf2 \cb3 \strokec2 #\cf4 \cb1 \strokec4 \
+\cf2 \cb3 \strokec2 #\'a0Complete\'a0the\'a0'apiResponseParser'\'a0function\'a0below.\cf4 \cb1 \strokec4 \
+\cf2 \cb3 \strokec2 #\cf4 \cb1 \strokec4 \
+\cf2 \cb3 \strokec2 #\'a0The\'a0function\'a0is\'a0expected\'a0to\'a0return\'a0an\'a0INTEGER_ARRAY.\cf4 \cb1 \strokec4 \
+\cf2 \cb3 \strokec2 #\'a0The\'a0function\'a0accepts\'a0following\'a0parameters:\cf4 \cb1 \strokec4 \
+\cf2 \cb3 \strokec2 #\'a0\'a01.\'a0STRING_ARRAY\'a0inputList\cf4 \cb1 \strokec4 \
+\cf2 \cb3 \strokec2 #\'a0\'a02.\'a0INTEGER\'a0size\cf4 \cb1 \strokec4 \
+\cf2 \cb3 \strokec2 #\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\sl460\partightenfactor0
+\cf5 \cb3 \strokec5 import\cf4 \strokec4 \'a0requests\cb1 \
+\cf5 \cb3 \strokec5 def\cf4 \strokec4 \'a0apiResponseParser(inputList,\'a0size):\cb1 \
+\pard\pardeftab720\sl460\partightenfactor0
+\cf4 \cb3 \'a0\'a0\'a0\'a0url\'a0=\'a0\cf6 \strokec6 "https://raw.githubusercontent.com/arcjsonapi/ApiSampleData/master/api/users"\cf4 \cb1 \strokec4 \
+\cb3 \'a0\'a0\'a0\'a0response\'a0=\'a0requests.get(url)\cb1 \
+\cb3 \'a0\'a0\'a0\'a0data\'a0=\'a0response.json()\cb1 \
+\cb3 \'a0\'a0\'a0\'a0\cf2 \strokec2 #print\'a0(data)\cf4 \cb1 \strokec4 \
+\cb3 \'a0\'a0\'a0\'a0\cb1 \
+\cb3 \'a0\'a0\'a0\'a0fieldNames\'a0=\'a0inputList[\cf2 \strokec2 0\cf4 \strokec4 ].split(\cf6 \strokec6 '.'\cf4 \strokec4 )\cb1 \
+\cb3 \'a0\'a0\'a0\'a0opType\'a0=\'a0inputList[\cf2 \strokec2 1\cf4 \strokec4 ]\cb1 \
+\cb3 \'a0\'a0\'a0\'a0values\'a0=\'a0inputList[\cf2 \strokec2 2\cf4 \strokec4 ].split(\cf6 \strokec6 ','\cf4 \strokec4 )\cb1 \
+\cb3 \'a0\'a0\'a0\'a0\cf5 \strokec5 print\cf4 \strokec4 (fieldNames,opType,values)\cb1 \
+\cb3 \'a0\'a0\'a0\'a0num\'a0=\'a0\cf5 \strokec5 len\cf4 \strokec4 (values)\cb1 \
+\cb3 \'a0\'a0\'a0\'a0ids\'a0=\'a0[]\cb1 \
+\cb3 \'a0\'a0\'a0\'a0\cb1 \
+\cb3 \'a0\'a0\'a0\'a0updated\'a0=\'a0\cf5 \strokec5 False\cf4 \cb1 \strokec4 \
+\cb3 \'a0\'a0\'a0\'a0\cf5 \strokec5 for\cf4 \strokec4 \'a0d\'a0\cf5 \strokec5 in\cf4 \strokec4 \'a0data:\cb1 \
+\cb3 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0val\'a0=\'a0d\cb1 \
+\cb3 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf5 \strokec5 for\cf4 \strokec4 \'a0f\'a0\cf5 \strokec5 in\cf4 \strokec4 \'a0fieldNames:\cb1 \
+\cb3 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0val\'a0=\'a0val[f]\cb1 \
+\cb3 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf5 \strokec5 if\cf4 \strokec4 \'a0val\'a0\cf5 \strokec5 in\cf4 \strokec4 \'a0values:\cb1 \
+\cb3 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0ids.append(d[\cf6 \strokec6 "id"\cf4 \strokec4 ])\cb1 \
+\cb3 \'a0\'a0\'a0\'a0\cf5 \strokec5 if\cf4 \strokec4 \'a0\cf5 \strokec5 len\cf4 \strokec4 (ids):\cb1 \
+\cb3 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf5 \strokec5 return\cf4 \strokec4 \'a0ids\cb1 \
+\cb3 \'a0\'a0\'a0\'a0\cf5 \strokec5 return\cf4 \strokec4 \'a0[\cf2 \strokec2 -1\cf4 \strokec4 ]\cb1 \
+\cb3 \'a0\'a0\'a0\'a0\cb1 \
+\pard\pardeftab720\sl460\partightenfactor0
+\cf5 \cb3 \strokec5 if\cf4 \strokec4 \'a0__name__\'a0==\'a0\cf6 \strokec6 '__main__'\cf4 \strokec4 :\cb1 \
+\pard\pardeftab720\sl460\partightenfactor0
+\cf4 \cb3 \'a0\'a0\'a0\'a0fptr\'a0=\'a0\cf5 \strokec5 open\cf4 \strokec4 (os.environ[\cf6 \strokec6 'OUTPUT_PATH'\cf4 \strokec4 ],\'a0\cf6 \strokec6 'w'\cf4 \strokec4 )\cb1 \
+\
+\cb3 \'a0\'a0\'a0\'a0inputList_count\'a0=\'a0\cf5 \strokec5 int\cf4 \strokec4 (\cf5 \strokec5 input\cf4 \strokec4 ().strip())\cb1 \
+\
+\cb3 \'a0\'a0\'a0\'a0inputList\'a0=\'a0[]\cb1 \
+\
+\cb3 \'a0\'a0\'a0\'a0\cf5 \strokec5 for\cf4 \strokec4 \'a0_\'a0\cf5 \strokec5 in\cf4 \strokec4 \'a0\cf5 \strokec5 range\cf4 \strokec4 (inputList_count):\cb1 \
+\cb3 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0inputList_item\'a0=\'a0\cf5 \strokec5 input\cf4 \strokec4 ()\cb1 \
+\cb3 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0inputList.append(inputList_item)\cb1 \
+\
+\cb3 \'a0\'a0\'a0\'a0size\'a0=\'a0\cf5 \strokec5 int\cf4 \strokec4 (\cf5 \strokec5 input\cf4 \strokec4 ().strip())\cb1 \
+\
+\cb3 \'a0\'a0\'a0\'a0result\'a0=\'a0apiResponseParser(inputList,\'a0size)\cb1 \
+\
+\cb3 \'a0\'a0\'a0\'a0fptr.write(\cf6 \strokec6 '\\n'\cf4 \strokec4 .join(\cf5 \strokec5 map\cf4 \strokec4 (\cf5 \strokec5 str\cf4 \strokec4 ,\'a0result)))\cb1 \
+\cb3 \'a0\'a0\'a0\'a0fptr.write(\cf6 \strokec6 '\\n'\cf4 \strokec4 )\cb1 \
+\
+\cb3 \'a0\'a0\'a0\'a0fptr.close()\cb1 \
+\
+}

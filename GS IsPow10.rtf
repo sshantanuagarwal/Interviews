@@ -1,0 +1,101 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2580
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 /* Problem Name is &&& Is Power of 10 &&& PLEASE DO NOT REMOVE THIS LINE. */\
+/**\
+ * Instructions to candidate.\
+ *  1) Run this code in the REPL to observe its behaviour. The\
+ *     execution entry point is main().\
+ *  2) Consider adding some additional tests in doTestsPass().\
+ *  3) Implement isPowerOf10() correctly.\
+ *  4) If time permits, some possible follow-ups.\
+ */\
+\
+\
+public class Solution\
+\{\
+  /**\
+   * bool isPowerOf10(int x)\
+   * Returns true if x is a power-of-10. Otherwise returns false.\
+   */\
+  public static boolean isPowerOf10On(int x) \{\
+  // todo: implement here\
+    boolean result = false;\
+    int rem = 0;\
+    while(x > 1) \{\
+      rem = x % 10;\
+      if(rem != 0) \{\
+        return false;\
+      \} \
+      x = x / 10;\
+    \}\
+    return x == 1;\
+  \}\
+\
+  \
+  public static boolean isPowerOf10(int x) \{\
+  // todo: implement here\
+    // 2^32 = 4 * 1024 * 1024 * 1024 = 4  000 000 000\
+    return x == 1 || \
+           x == 10 || \
+           x == 100 || \
+           x == 1000 || \
+           x == 10000 || \
+           x == 100000|| \
+           x == 1000000 || \
+           x == 10000000 || \
+           x == 100000000 ||\
+           x == 1000000000;\
+  \}\
+\
+  /**\
+   * bool doTestsPass()\
+   * Runs various tests. Returns true if tests pass. Otherwise,\
+   * returns false.\
+   */\
+  public static boolean doTestsPass()\
+  \{\
+  // todo: implement more tests, please\
+  // feel free to make testing more elegant\
+  int[] isPowerList = \{1,10,100,1000,10000,100000\};\
+  int[] isNotPowerList = \{3, 23, 56,1287348, -1, 0, -1000\};\
+\
+    \
+    \
+  for(int i : isPowerList)\
+  \{\
+    if(!isPowerOf10(i))\
+    \{\
+    System.out.println("Test failed for: " + i);\
+    return false;\
+    \}\
+  \}\
+\
+  for(int i : isNotPowerList)\
+  \{\
+    if(isPowerOf10(i))\
+    \{\
+    System.out.println("Test failed for: " + i);\
+    return false;\
+    \}\
+  \}\
+\
+  System.out.println("All tested passed");\
+  return true;\
+  \};\
+\
+\
+  /**\
+   * Execution entry point.\
+   */\
+  public static void main(String args[])\
+  \{\
+  doTestsPass();\
+  \}\
+\}\
+\
+}

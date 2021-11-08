@@ -1,0 +1,118 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2580
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 def sendSequece(words):\
+    seq = []\
+    seq.add(words[0])\
+\
+    newList = words - [words[0]]\
+    for word in words:\
+        c = word[-1]\
+        for newWord in newList:\
+            if newWord.startswith(c):\
+                seq.add(newWord)\
+                break;\
+    return seq  \
+\
+\
+map = \{\}\
+\
+\
+def addSeqTreeRec(seq, remwords, totalSize):\
+    if seq.length == totalSize:\
+        return seq\
+    c = seq[-1][-1] # last character of last word in seq\
+    found = False\
+    if seq not in map:\
+        for word in remwords:\
+            if word.startswith(c):\
+                seq.add(word)\
+                remwords.remove(word)\
+                found = True\
+        seq = addSeqTreeRec(seq, remwords)\
+    else :\
+        seq = addSeqTreeRec( seq, map[seq] ) \
+    \
+    if found == False:\
+        return seq\
+    return seq        \
+        \
+    \
+def addSeqTree(words):\
+    \
+    seq = []\
+    totalSize = words.length\
+    for word in words:\
+        seq.add(word)\
+        map[seq] = words\
+        words = words - [word]\
+        addSeqTreeRec(seq, words, totalSize)\
+'''\
+// ab bc bd de eb\
+\
+\
+// ab eb bc bd ce\
+\
+# // shantanu, uman, neha, anees\
+ s u shantanu\
+ u n uman\
+ n a neha\
+ a s anees\
+ \
+ \
+Enum color \{\
+Black,\
+White\
+\}\
+Class Coordinate \{\
+int x;\
+int y;\
+\}\
+ \
+Player \{\
+\}\
+\
+Board \{\
+\
+    int[] [] boxes = new int[] [] ;\
+    \
+    \
+\}\
+\
+\
+Action \{\
+    List<Coordinate> DiagonalMovement(Coordinate) \{\
+        return validCoordinate();\
+    \}\
+    StraightMovement\
+    \
+\}\
+\
+Class Piece \{\
+    public bool canMove() \{\
+    \}\
+    \
+    \
+    public List<Coordinate> validMoves() \{\
+    \}\
+    \
+\}\
+\
+Class King extends Piece () \{\
+    King(Coordinate, Color) \{\
+        this.Coordinate = Coordinate;\
+        this.color = color;\
+    \}\
+    \
+    @ovveride\
+    public bool canMove() \{\
+        Player currentPlayer = new Player()l\
+        if currentPlayer.color != this.color:\
+            return false;\
+        if \
+        \
+    '''}

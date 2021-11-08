@@ -1,0 +1,62 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2580
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 LucidaGrande;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 # arbitrary # of * in pattern\
+# n      m           n*m\
+# chat   *c*a*t    
+\f1 \uc0\u8594 
+\f0  true  ct\
+# chat   *ca*t\
+# cat   *t*a*c*  
+\f1 \uc0\u8594 
+\f0  false tac\
+\
+# aaaxxxxbbbyyyccxccczzzdddz    \
+# aaa  * bbb    * ccc * ddd -> true\
+# 1      7        15    21 \
+\
+def isMatch(val, pattern):\
+    print(val,pattern)\
+    if("*" in pattern):\
+        index = 0\
+        \
+        parts = pattern.split("*")\
+        endPart = parts[1:-1]\
+        for part in parts[:-1]:\
+            if(len(part) == 0):\
+                continue\
+            if(part in val):\
+                index = val.index(part,0,len(val))\
+                \
+                newIndex = index + len(part)\
+                val = val[ newIndex : ]\
+            else:\
+                return False\
+        \
+        # End part\
+        index = -1 * len(endPart)\
+        val = val[  index: ]\
+        print(endPart, val)\
+\
+        return val == endPart # Exact Match\
+            \
+    return val == pattern # Exact Match\
+\
+\
+print(isMatch("scat","c*t"))\
+print(isMatch("cat","*t"))\
+print(isMatch("dog","c*t"))\
+print(isMatch("dog","cat"))\
+print(isMatch("dog","dog"))\
+print(isMatch("dog",""))\
+print(isMatch("dog","*"))\
+\
+print(isMatch("dog","g*d"))\
+print(isMatch("dog","do*og"))\
+\
+\
+print(isMatch("aaaxxxxbbbyyyccxccczzzdddz","aaa*bbb*ccc*ddd"))}
