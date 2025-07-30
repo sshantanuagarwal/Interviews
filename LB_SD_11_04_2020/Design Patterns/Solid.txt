@@ -1,0 +1,206 @@
+Properties of OOL
+classes
+objects
+polymorphism
+Inheritence
+message passing
+Abstarction
+Encasulation
+
+SOLID pricinpals in OOL
+
+The following 5 concepts make up our SOLID principles:
+
+Single Responsibility
+Open/Closed
+Liskov Substitution
+Interface Segregation
+Dependency Inversion
+
+1. Single Responsibility
+
+a class should only have one responsibility. Furthermore, it should only have one reason to change.
+
+public class Book {
+
+    private String name;
+    private String author;
+    private String text;
+
+    //constructor, getters and setters
+}
+
+public class Book {
+
+    private String name;
+    private String author;
+    private String text;
+
+    //constructor, getters and setters
+
+    // methods that directly relate to the book properties
+    public String replaceWordInText(String word){
+        return text.replaceAll(word, text);
+    }
+
+    public boolean isWordInText(String word){
+        return text.contains(word);
+    }
+}
+
+
+public class Book {
+    //...
+
+    void printTextToConsole(){
+        // our code for formatting and printing the text
+    }
+}
+
+public class BookPrinter {
+
+    // methods for outputting text
+    void printTextToConsole(String text){
+        //our code for formatting and printing the text
+    }
+
+    void printTextToAnotherMedium(String text){
+        // code for writing to any other location..
+    }
+}
+
+
+2. Open for Extension, Closed for Modification  (open-closed principle)
+
+classes should be open for extension, but closed for modification. In doing so, we stop ourselves from modifying existing code and causing potential new bugs.
+
+public class Guitar {
+
+    private String make;
+    private String model;
+    private int volume;
+
+    //Constructors, getters & setters
+}
+
+public class SuperCoolGuitarWithFlames extends Guitar {
+
+    private String flameColor;
+
+    //constructor, getters + setters
+}
+
+3. Liskov Substitution
+
+ if class A is a subtype of class B, then we should be able to replace B with A without disrupting the behavior of our program.
+
+ public interface Car {
+
+    void turnOnEngine();
+    void accelerate();
+}
+
+public class MotorCar implements Car {
+
+    private Engine engine;
+
+    //Constructors, getters + setters
+
+    public void turnOnEngine() {
+        //turn on the engine!
+        engine.on();
+    }
+
+    public void accelerate() {
+        //move forward!
+        engine.powerOn(1000);
+    }
+}
+
+public class ElectricCar implements Car {
+
+    public void turnOnEngine() {
+        throw new AssertionError("I don't have an engine!");
+    }
+
+    public void accelerate() {
+        //this acceleration is crazy!
+    }
+}
+
+4. Interface Segregation
+
+larger interfaces should be split into smaller ones. By doing so, we can ensure that implementing classes only need to be concerned about the methods that are of interest to them.
+
+public interface BearKeeper {
+    void washTheBear();
+    void feedTheBear();
+    void petTheBear();
+}
+
+public interface BearCleaner {
+    void washTheBear();
+}
+
+public interface BearFeeder {
+    void feedTheBear();
+}
+
+public interface BearPetter {
+    void petTheBear();
+}
+
+public class BearCarer implements BearCleaner, BearFeeder {
+
+    public void washTheBear() {
+        //I think we missed a spot...
+    }
+
+    public void feedTheBear() {
+        //Tuna Tuesdays...
+    }
+}
+
+public class CrazyPerson implements BearPetter {
+
+    public void petTheBear() {
+        //Good luck with that!
+    }
+}
+
+5. Dependency Inversion
+
+The principle of Dependency Inversion refers to the decoupling of software modules. This way, instead of high-level modules depending on low-level modules, both will depend on abstractions.
+
+public class Windows98Machine {}
+
+public class Windows98Machine {
+
+    private final StandardKeyboard keyboard;
+    private final Monitor monitor;
+
+    public Windows98Machine() {
+        monitor = new Monitor();
+        keyboard = new StandardKeyboard();
+    }
+
+}
+
+public interface Keyboard { }
+
+public class StandardKeyboard implements Keyboard { }
+
+public class BrailKeyboard implements Keyboard { }
+
+public class Windows98Machine{
+
+    private final Keyboard keyboard;
+    private final Monitor monitor;
+
+    public Windows98Machine(Keyboard keyboard, Monitor monitor) {
+        this.keyboard = keyboard;
+        this.monitor = monitor;
+    }
+}
+
+Windows98Machine obj = new Windows98Machine(new BrailKeyboard(), monitor)

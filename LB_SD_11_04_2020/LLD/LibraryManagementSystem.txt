@@ -1,0 +1,110 @@
+Design a Library Management System
+
+Requirments
+
+1. Search books by their title and author.
+2. Each book will have a unique identification number (ISBN).
+3. maximum limit (5) on how many books a member can check-out.
+4. maximum limit (10) on how many days a member can keep a book.
+5. Each book and member card will have a unique barcode. The system will be able to read barcodes from books and members’ library cards.
+---
+6. if book reservation is allowed
+7. notifications : reservation, due date
+8. Fine and payment
+
+
+Actors:
+1. Librarian
+2. Member
+3. System
+
+UseCases:
+1. Add/Remove/Edit book
+2. Search Catalouge
+3. Register/Cancel
+4. Check out
+5. Return book
+6. Renew book
+
+      IS1  IS1   IS1
+abc:  abc ,abc  ,abc
+      br1  br2  br3
+
+
+b1: -> A1 , A2
+b2: -> A1
+b3: -> A2,A3
+
+
+--------------
+Account
+  - accId
+  - password
+  - status: AccountStatus
+  - userId: User
+
+LibraryCard
+  - cardNumber:
+  - barcode:
+  - issuedAt:
+  - status: Boolean
+  -- getStatus
+
+User
+  - Id
+  - name
+  - email
+  - phoneNo
+
+Librarian  <User>
+  -- addBook()
+  -- blockMember();
+  -- removeBook();
+  -- editBookInfo();
+  -- issueBook(BookItem,Account)
+
+Member  <User>
+  - dateOfMembership
+  - totalBooksCheckout
+  -- getTotalCheckout()
+
+******
+AccountStatus
+
+
+
+-------------------------
+Book
+  - ISBN:
+  - title:
+  - subject:
+  - list<BookItems>
+  -- getTitle();
+
+BookItem  <Book>
+  - barcode:
+  - borrowedDate:
+  - dueDate:
+  - status: BookStatus
+
+
+Author
+  - name
+  - descripton
+  -- getAuthor()
+
+Catalouge
+   - bookTitles:<string,list>
+   - bookAuthor:<string,list>
+   --updateCataoge()
+
+******
+BookStatus
+
+---------------------------
+
+Library (system)
+  - id:
+  - address
+  - list<Book>
+  - list<Accounts>

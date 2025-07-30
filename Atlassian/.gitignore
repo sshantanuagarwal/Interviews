@@ -1,0 +1,56 @@
+# Embedded Git repositories
+Alexandria/
+Algorithm-and-Leetcode/
+
+# IDE files
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Build outputs
+out/
+target/
+build/
+*.class
+*.jar
+*.war
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# Data files (if you don't want to track them)
+data/
+exports/
+
+# Archives
+*.zip
+*.tar.gz
+*.rar
+
+# Documents (optional - uncomment if you don't want to track these)
+# *.pdf
+# *.docx
+# *.rtf
+# *.png
+# *.jpg
+# *.jpeg
+
+# Node modules (if any)
+node_modules/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.env 

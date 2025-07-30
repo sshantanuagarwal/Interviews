@@ -1,0 +1,502 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 //API    0-100ms\
+//1000s api\
+\
+\
+// p50 - 50% of the api calls are less than this value\
+// p90\
+\
+\
+// 10 - 1, 2, 3, 4, 10, 20 ,70 ,80, 90, 100\
+// 10 - 20, 10, 5, 10, 5, 10, 10, 10, 10, 10\
+\
+\
+\
+// p50, p90, avg, mode\
+\
+//10.10.1.0/28 \
+\
+/*\
+class BucketData \{ \
+  int id;\
+  int count;\
+  \
+\}\
+  \
+class BucketInfo \{ \
+  Map< BucketId, BucketData > data = new Map< BucketId, BucketData > ;\
+  \
+  int count;\
+  \
+  \
+  void addNewApi() \{\
+  \
+    // Populate this map and increment the count.\
+    count++;\
+    \
+  \}\
+  \
+  int getPPercent ( int percent ) \{\
+  \
+    int theshold = percent * count / 100;\
+    for( BucketId iter : data.keySet() ) \{\
+      int perBucketCount = data.get( iter );\
+      int total += perBucketCount;\
+      if( total > theshold ) \{\
+        return iter;\
+      \}\
+    \}\
+  \}\
+\
+  int getAverage() \{ \
+    aver = sum( data.key * data.value ) / count ;\
+    getPPercent( ); \
+  \}\
+  \
+  int getMode( ) \{\
+    max( data.vlaueSet() );\
+  \}\
+\
+\
+/*\
+  class Time \{\
+  \}\
+\
+\
+  class Person \{\
+    username\
+    password\
+    ranking\
+\
+    def addItem() \{ \
+        \
+      I) Client Side\
+        1) Add the item description.\
+        2) Item summary\
+        3) start bid amount\
+        4) start time\
+        5)  \
+          AuctionItem ( ... );\
+      \
+         |       |\
+         |       |\
+         v       v\
+           2 API\
+      \
+      atomic transactional \{\
+        II) Validity of the product\
+          1) Item is belonging to user.\
+          2) Item category is verified.\
+          3) startTime is beyond the currentTime;\
+          4) endTime > startTime;\
+          5) The start bid is not negative\
+          6) User is not malicious\
+\
+        III) Add to the database of AuctionItems\
+      \}\
+      \
+    \}\
+  \}\
+\
+  class AuctionItem \{\
+    int auctionId;\
+    stirng description\
+    string summay\
+    int bid;\
+    time startTime;\
+    time endTime;\
+    Person seller;\
+  \}\
+\
+  class AuctionItems \{\
+    AuctionItem [ auctionId ];\
+  \}\
+  \
+  class Bidder \{ \
+\
+\
+    map ( Person, bid );\
+\
+  \}\
+\
+\
+  synchronized L() \{\
+\
+    prevBid = Bidder( Person, bid );\
+    \
+    currBud = Bidder( Person, bid );\
+\
+    currBud.bid > 1.1 * prevBid.bid;\
+  \}\
+\
+\
+  \
+  addItem() \{\
+    \
+  \
+  start :  100\
+  \
+  \
+\
+\
+*/\
+\
+\
+\
+\
+/*\
+\
+class AccountInfo \{\
+  String accountName;\
+  int ranking;\
+  Location loc;\
+\}\
+\
+\
+\
+class LeaderBoard() \{\
+  \
+  \
+\
+\}\
+\
+\
+\
+\
+int getBucketSize( LeaderBoardName )\
+List< accountNames> getAccounts( LeaderBoardName );\
+List< accountNames> getSortedAccountByFilters( LeaderBoardName );\
+  oldestMember\
+  Ranks\
+  country/location\
+  friendList\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+*/\
+\
+import java.io.*;\
+import java.util.*;\
+\
+/*\
+\
+class AccountInfo \{\
+  String accountName;\
+  String ipAddress;\
+\}\
+\
+List<AccountInfo> ai\
+Set< String > ipAddresses ips;\
+ \
+\
+2 acts are Duplicate iff:\
+a. same ip address\
+AND\
+b. account name of one is prefix of the other\
+\{ \
+\}\
+Find number of unique accounts\
+\
+*/\
+\
+/*\
+ * To execute Java, please define "static void main" on a class\
+ * named Solution.\
+ *\
+ * If you need more classes, simply define them inline.\
+ */\
+\
+\
+class TrieNode \{\
+  char data;\
+  List< TrieNode > next = new ArrayList<TrieNode>();\
+  boolean endOfString;\
+  \
+  TrieNode( char c, boolean eos ) \{\
+    this.data = c;\
+    this.endOfString = eos;\
+    int length = 256;\
+    for( int i = 0; i < length; i++ ) \{\
+      next.add( null );\
+    \}\
+\}\
+\
+class Trie \{\
+  TrieNode root = null;\
+  \
+  Trie() \{\
+    if( root == null ) \{\
+      TrieNode n = newNode( '/', false  );\
+      this.root = n;\
+    \}\
+  \}\
+  \
+  TrieNode newNode( char c, boolean end ) \{\
+    return new TrieNode(c, end); \
+  \}\
+  \
+  void insert( String name ) \{\
+\
+    int length = name.size();\
+    TrieNode iter = this.root;\
+    for( int i = 0 ; i < length; i++ ) \{\
+      char c = name.charAt( i );\
+      boolean eos = ( i == length - 1 ); \
+      iter.next[ c ] = newNode( c, eos );\
+      iter = iter.next[ c ];\
+    \}\
+      \
+  \}\
+  \
+  boolean prefixAlreadyPresent( String name ) \{\
+    if( root == null ) \{\
+      return  name.size() == 0;\
+    \}\
+  \}\
+  \
+  int countPaths( ) \{\
+    // Return number of paths;\
+  \}\
+\}\
+class Solution \{\
+  \
+  public int findDuplicates( List<AccountInfo> ai ) \{\
+    \
+    // a) Same ipAddresses \
+    Map< String, List<String> > map = new Map< String, List<String> >();\
+    \
+    /*\
+\
+    10.1.1.1 : [ john, john2, john3 ], -> 1\
+    20.1.1.1 : [ ram, ram_tes1, shyam ], -> 2\
+    30.1.1.1 : [ ram, ram_tes1, shyam ], -> 2\
+    */\
+    for( AccountInfo iter : ai ) \{\
+      \
+      if( map.containsKey( iter.ipAddress ) ) \{\
+        List<String> name = map.get( iter.ipAddress );\
+        name.add( iter.accountName );\
+        map.put(  iter.ipAddress, name );\
+      \} else \{\
+        List<String> name = new ArrayList<String>();\
+        name.add( iter.accountName );\
+        map.put( iter.ipAddress, name );\
+      \}\
+       \
+      \
+    \}\
+    \
+    \
+    numUniqueAccounts = 0;\
+    \
+    for( String ipAddress : map.keySet() ) \{\
+      Trie t = new Trie();\
+      for( String name : map.get( ipAddress ) ) \{\
+        t.insert( name );\
+      \}\
+      numUniqueAccounts += t.countPaths();\
+    \}\
+    return numUniqueAccounts;\
+      \
+  \}\
+  \
+    \
+    \
+  public static void main(String[] args) \{\
+    ArrayList<String> strings = new ArrayList<String>();\
+    strings.add("Hello, World!");\
+    strings.add("Welcome to CoderPad.");\
+    strings.add("This pad is running Java " + Runtime.version().feature());\
+\
+    for (String string : strings) \{\
+      System.out.println(string);\
+    \}\
+  \}\
+\}\
+\
+\
+/* \
+Your previous Python 3 content is preserved below:\
+\
+'''\
+Given an int, x and another int, n\
+find if nth bit of x is set or not\
+\
+x & ( 1<< n )\
+\
+\
+\
+'''\
+\
+# Your previous Plain Text content is preserved below:\
+# \
+# Hi\
+# \
+# Two input strings -> input, pattern\
+# Both will be sanitized\
+# \
+# Three Rules -\
+# 1. a,b,c....z will match the same character that they denote\
+# 2. * character which will match zero or more of the preceding character\
+# 3. . character which is a wildcard character which will only match a single character\
+# \
+# \
+# Input            Pattern                Result\
+# \
+# abc              abc                    True\
+# abcd             abc                    False\
+# abc              abcd                   False\
+# \
+# aaabbbccc        a*b*c*                 True\
+# aacc             a*b*c*                 True\
+# aaaabbcc         aa*ab*c*               True\
+# \
+# abc              .bc                    True\
+# aaabbcc          a*b*c*.                True\
+# ashdkjasd        .*                     True\
+\
+class StringPreProcess( object ):\
+    char = ""\
+    count = 0\
+    def __init__( self, c, i ):\
+        self.char = c\
+        self.count = i\
+\
+class PatternPreProcess( object ):\
+    char = ""\
+    minCount = 0\
+    maxCount = 0\
+    def __init__( self, c, i1, i2 ):\
+        self.char = c\
+        self.minCount = i\
+        self.maxCount = i\
+\
+def preProcessString( string ):\
+    print( "Preprcess string" )\
+    length = len( string )\
+    data = []\
+    if length == 0:\
+        return data\
+    \
+    prev = string[ 0 ]\
+    count = 1\
+    i = 1\
+    while i < length:\
+        while( string[ i ] == prev ):\
+            count += 1\
+            i += 1\
+            prev = string[ i ]\
+        else:\
+            i += 1\
+        p = StringPreProcess( string[ i ], count )\
+        data.append( p )\
+    return data\
+\
+def preProcessPattern( pattern ):\
+    length = len( pattern )\
+    data = []\
+    if length == 0:\
+        return data\
+        \
+    prev = pattern[ 0 ]\
+    i = 1\
+    while i < length:\
+        minCount = 1\
+        maxCount = 1\
+        \
+        # aa*ab*c*   \
+        while( pattern[ i ] in [ prev, "*" ] ):\
+            \
+            if pattern[ i ] == "*" :\
+                maxCount = "INF"\
+                minCount -= 1\
+            else:\
+                minCount += 1\
+            prev = pattern[ i ]\
+            i += 1\
+        else:\
+            i += 1\
+        if( pattern[ i ] == '.' ):\
+            minCount = 1\
+            maxCount = 1\
+            \
+        p = PatternPreProcess( pattern[ i ], minCount, maxCount )\
+        data.append( p )\
+    return data\
+\
+def regexValidate( stringData, patternData ):\
+    numStringData = len( stringData )\
+    stringDataIter = 0\
+    for p in patternData:\
+        sd = stringData[ stringDataIter ] \
+        count = sd.count\
+        if( p.char == '.' ):\
+            count -= 1\
+            if( count < 0 ):\
+                return False\
+        elif( sd.char != p.char or \
+              count < p.minCount or\
+              ( isinstance( p.maxCount, int ) and sd.count > p.maxCount and\
+                not ( isinstance( p.maxCount, str ) ) ) ):\
+           return False\
+        stringDataIter += 1\
+               \
+    if( stringDataIter != numStringData ):\
+               return False\
+\
+    return True\
+    \
+if __name__ == '__main__':\
+    string = input( "Enter the string:\\n")\
+    pattern = input( "Enter the pattern:\\n" )\
+    \
+    stringData = preProcessString( string )\
+    patternData = preProcessPattern( pattern )\
+    \
+    regexValidate( stringData, patternData )\
+                   \
+#'''\
+# \
+# \
+# Input            Pattern                Result\
+# \
+# abc              abc                    True\
+# abcd             abc                    False\
+# abc              abcd                   False\
+# abcd             .....                  False\
+#a1b1c1d1           . 3 d\
+# aaabbbccc        a*b*c*                 True\
+# aacc             a*b*c*                 True\
+#a2c2               a NA b NA c NA   \
+# aaaabbcc         aa*ab*c*               True\
+#a4 b2 c2         a(2,NA) b 0,NA c (0,NA)\
+# abc              .bc                    True\
+# aaabbcc          a*b*c*                 True\
+# ashdkjasd        .*                     True\
+# ashdkjasd        ashd.*kjasd            True\
+\
+#'''\
+ */\
+  \
+  \
+  \
+  }

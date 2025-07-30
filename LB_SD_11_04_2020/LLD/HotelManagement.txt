@@ -1,0 +1,234 @@
+Hotel Management System
+
+Requirements
+1. System s.b allow the booking of different room types like standard, deluxe, family suite, etc.
+2. Guest s.b able to search the room inventory and book any available room.
+3. System s.b able to retrieve information, such as who booked a particular room, or what rooms were booked by a specific customer.
+4. System s.b allow customers to cancel their booking - and provide them with a full refund if the cancelation occurs before 24 hours of the check-in date.
+5. System s.b able to send notifications whenever the booking is nearing the check-in or check-out date.
+6. System s.b able to maitain room housekeeping log to keep track of all housekeeping tasks.
+7. Customer should be able to add room services and food items.
+8. customers should be able to pay their bills through credit card, check or cash.
+9. Customers can ask for different amenities like gym, wifi, pool, game room, spa, bf, lunch ,dinner.
+10. Customer allow to book multiple rooms.
+11. Customer allow to update booking date if room is available in that date.
+12. Every room type will have differnt rates.
+
+Actors:
+1. Guest/customer
+2. Manager
+3. Housekeeper
+4. receptionist
+5. system
+
+UseCases
+1. Add/Remove/Edit room
+2. Search room
+3. Book/Update/Cancel room
+4. Check In/Check Output
+5. Add Room services/Amenities
+6. Payment collect
+7. Maintaing housekeeping log
+
+*************************************
+Account
+  - id: String
+  - password: string
+  - status: AccountStatus
+
+AccountStatus      // Enum Class
+   - Active
+   - Closed
+   - Cancled
+   - Blacklisted
+
+
+Person
+  - name: String
+  - address: Address
+  - email: string
+  - phone: string
+  - accountType: AccountType
+
+AccountType
+  - Member
+  - Manager
+  - Receptionist
+  - HouseKeeping
+
+Member <Person>
+   --creatBooking():RoomBooking
+   --cancelBooking()
+   --updateBooking()
+   --bookingHistory()
+
+Receptionist <Person>
+   --creatBooking()
+   --cancelBooking()
+   --updateBooking()
+   --bookingHistory()
+   --auditFuntions()
+
+Housekeeper <Person>
+   -- assignToRoom()
+   -- cleanRoom()
+
+Manager  <Person>
+   -- addRoom()
+   -- removeRoom()
+   -- editRoom()
+   -- maintainHKLogs()
+
+**********************************
+Hotel
+  -name: String
+  --addLocation()
+
+HotelLocation
+  -name: stirng
+  -location: Address
+  --getRooms(): List<Room>
+
+Room
+  -roomNumber: String
+  -roomType: RoomType
+  -status: RoomStatus
+  --isAvaliable():Boolean
+  --getCheckIn():Datetime
+  --getCheckout():Datetime
+
+RoomType
+   -name: string
+   -description: string
+   -price: Double
+   -List<Amenity> freeAmenities
+   -List<RoomService> freeRoomService
+   -- getPrice()
+   -- getDescription()
+
+Standard <RoomType>
+Deluxe <RoomType>
+FamilySuite <RoomType>
+
+RoomKey
+  -keyId: String
+  -barCode: String
+  -issuedAt:Datetime
+  -status: KeyStatus
+  -keyType: KeyType
+  -issueToRoom: Room
+
+KeyType //enum
+ -normal
+ -master
+
+KeyStatus //enum
+  -active
+  -inactive
+
+RoomHouseKeeping
+  -descripton:string
+  -startDate:Datetime
+  -duration: internal
+  --doHouseKeeping():bool
+
+  RoomBooking
+    -reservationNumber: string
+    -startDate: Datetime
+    -endDate: Datetime
+    -status: BookingStatus
+    -bookedBy: Member
+    -room:Room
+    -bookingDate: Datetime
+    -hote:Hotel
+    --getDetails():RoomBooking
+
+**********************************
+Amenity <InvoiceItem>
+ - name:String
+ - price:Double
+ - description: String
+ - isFree: bool
+
+ Gym  <Amenity>
+ Wifi <Amenity>
+ pool <Amenity>
+
+
+RoomService <InvoiceItem>
+   - name:string
+   - price:Double
+   - description
+   - isFree
+
+laundry <RoomService>
+   --getRate()
+
+MailService <RoomService>
+    --getRate()
+
+KitchenService <RoomService>
+    --getRate()
+
+******************************
+
+Notifications
+   - id: int
+   - createdOn: Datetime
+   - content: string
+   -- send()
+
+Sms <>
+  -phoneNo:string
+
+Email <>
+  -email: string
+
+*********************
+
+Invoice
+   -invoiceId: string
+   -amount();
+   -rservationId: RoomBoking
+   -List<InvoiceItem>:List
+   --addInvoiceItem()
+   --getInvoiceItem()
+   --calculateTotal();
+
+InvoiceItem
+   -name:Name
+   -amount:Double
+   -issedAt:Datetime
+
+
+Transaction
+  -id: string
+  -amount: double
+  -status: PaymentStatus
+  -invoiceId: Invoice
+
+CreditCardTracsaction
+   -cardNo:
+   -billingAddress:
+   -nameOncard:
+
+CheckTransantion
+    -bankName:String
+    -chequeNo:string
+
+CashTransaction:
+    -tenderam
+
+
+*****************************
+System
+  --addAccount
+  --changeAccoutnStatus
+  --viewAudits
+  --searchRooms
+
+
+Interface search
+  --searchRoom(RoomType,StartDate,Duration)
+  --searchRoom(StartDate,Duration)
+  --searchRoom(RoomType)

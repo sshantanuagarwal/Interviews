@@ -1,0 +1,30 @@
+knowledge of issues with monolithic architect and migrating to micro services, and java6 to 8
+
+How would you handle 2 users buying a product online, but the inventory has only 1 unit. We want one user to complete the order and other to fail.
+
+Various methods in executors , 
+Difference b/t fixed thread pool and cache thread pool , 
+What will happen if both are configured with thread count Use and benefits of stream
+
+Functional interface
+
+Diamond problem with functional interface
+
+Contract of hashCode and equals
+
+Producer consumer problem
+
+Annotations in spring , use of qualifier
+
+Benefits of spring jdbc
+
+Bean life cycle
+
+knowledge on java 8
+
+
+Problem Solving Questions:
+
+Q) Given pair {Y,C} {D,A} {B,D} {C,B} , find the start and end character
+Q) maximize profit for given stock prized for n days by buy/ sell
+Q) find 5 most freq occurring words in file.

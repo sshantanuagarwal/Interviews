@@ -1,0 +1,105 @@
+Object Oriented
+
+Objects : Objects represent a real-world entity and the basic building block of OOP.
+
+Class : Class is the prototype or blueprint of an object
+
+Principal:
+
+1. Encapsulation : mechanism of binding the data together and hiding it from the outside world. Encapsulation is achieved when each object keeps its state private so that other objects don’t have direct access to its state
+
+2. Abstraction : Abstraction can be thought of as the natural extension of encapsulation. It means hiding all but the relevant data about an object in order to reduce the complexity of the system.
+
+3. Inheritance:  Inheritance is the mechanism of creating new classes from existing ones.
+
+4. Polymorphism: Is the ability of an object to take different forms and thus, depending upon the context, to respond to the same message in different ways.
+
+
+OO Analysis and Design
+This design process consists of an investigation into the objects constituting the system.
+
+
+The process of OO analysis and design can be described as:
+
+1. Identifying the objects in a system;
+2. Defining relationships between objects;
+3. Establishing the interface/class of each object; and,
+4. Making a design, which can be converted to executables using OO languages.
+
+
+Unified Modeling Language
+
+UML is a way of visualizing and documenting a software system by using a collection of diagrams, which helps engineers, businesspeople, and system architects understand the behavior and structure of the system being designed.
+
+
+Types of UML Diagrams:
+
+14 different kinds of diagrams
+
+
+Structural UML diagrams
+
+1. Class diagram
+2. Object diagram
+3. Package diagram
+4. Component diagram
+5. Composite structure diagram
+6. Deployment diagram
+7. Profile diagram
+
+Behavioral UML diagrams
+
+1. Use case diagram
+2. Activity diagram
+3. Sequence diagram
+4. State diagram
+5. Communication diagram
+6. Interaction overview diagram
+7. Timing diagram
+
+focusing on the following UML diagrams:
+
+1. Use Case Diagram: Used to describe a set of user scenarios, this diagram, illustrates the functionality provided by the system.
+
+2. Class Diagram: Used to describe structure and behavior in the use cases, this diagram provides a conceptual model of the system in terms of entities and their relationships.
+
+3. Activity Diagram: Used to model the functional flow-of-control between two or more class objects.
+
+4. Sequence Diagram: Used to describe interactions among classes in terms of an exchange of messages over time.
+
+******************
+
+Use Case Diagrams
+
+set of actions (called use cases) that a system should or can perform in collaboration with one or more external users of the system (called actors).
+
+Use Case: it illustrates a unit of functionality provided by the system.
+
+
+******************
+
+Class Diagram
+
+- backbone of object-oriented modeling
+- it shows how different entities (people, things, and data) relate to each other. In other words, it shows the static structures of the system.
+
+
+different types of relationships between classes
+
+1. Association:
+   a. bi-directional: both classes are aware of each other and their relationship
+   b. uni-directional: two classes are related - but only one class knows that the relationship exists.
+
+2. Multiplicity: how many instances of a class participate in the relationship
+   a. One to one : A 1  ----- 1 B
+   b. One to many: A 1  ----- * B
+   c. many to one: A *  ----- 1 B
+   d. many to many: A *  ----- * B
+
+3. Aggregation: child can exist independently of the parent
+
+4. Composition: child cannot exist independent of the parent
+
+5. Generalization:
+
+6. Inheritance:

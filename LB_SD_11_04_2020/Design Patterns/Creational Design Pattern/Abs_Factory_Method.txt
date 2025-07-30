@@ -1,0 +1,74 @@
+Abstract Design Patterns
+
+Abstract Factory pattern is almost similar to Factory Pattern is considered as another layer of abstraction over factory pattern. Abstract Factory patterns work around a super-factory which creates other factories.
+
+
+product
+  - x 
+  - y
+  - m
+  - n
+
+cond1:
+  (x/m)
+
+cond2:
+  (y/n)
+
+
+Product Alert
+  - macAlert
+  - windowsAlert
+  - linuxAlert
+
+Product Button
+  - macButton
+  - windowsButton
+  - linuxButton
+
+
+env conditions
+
+env = mac
+    macAlert + macButton
+
+env = windows
+    windowsAlert + windowsButton
+
+Interface UIFactory
+   -getAlert()
+   -getButton()
+
+ class MacEnv implements factory
+    -getAlert() // mac
+    -gteButtom() //mac
+
+class WindowEnv implements factory
+       -getAlert() // windows
+       -gteButtom() //windows
+
+class LinuxEnv implements factory
+    -getAlert() // Linix
+    -gteButtom() //Linux
+
+
+Interface EnvFactory
+    -getEnv();
+
+class EnvFactoryImpl implements EnvFactory{
+  public getEnv(String currEnv){
+   if(currEnv==mac)
+      return new MacEnv();
+   else if(currEnv==windows)
+      return new WindowEnv();
+    else
+      return New LInuxEnv();
+  }
+
+}
+
+client
+  EnvFactory envFactoryObj = new envFactory();
+    envFactoryObj.getEnv("Windows");
+
+  ---------------------

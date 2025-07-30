@@ -1,0 +1,143 @@
+Facade Design Pattern
+
+- hides all complexities of a system and provide a simple interface
+
+- Facade pattern is often needed when there is a large number of interdependent classes. It is used as a camouflage to cover the complexities of a large system and therefore provides a simple interface to the client. In other words, it is a wrapper class used to hide the implementation details.
+
+
+1. Facade defines a higher-level interface that makes the subsystem easier to use by wrapping a complicated subsystem.
+
+2. This reduces the learning curve necessary to successfully leverage the subsystem.
+
+3. It also promotes decoupling the subsystem from its potentially many clients.
+
+
+implementation
+
+class Waiter_Subsystem1
+{
+public:
+  void writeOrder()   { cout << " Waiter writes client's order\n";}
+  void sendToKitchen(){ cout << " Send order to kitchen\n";}
+  void serveCustomer(){ cout << " Yeeei customer is served!!!\n";}
+};
+
+class Kitchen_Subsystem2
+{
+public:
+    void prepareFood(){ cout << " Cook food\n";}
+    void callWaiter() { cout << " Call Waiter\n";}
+    void washDishes() { cout << " Wash the dishes\n";}
+};
+
+interface Order_Facade{
+  void orderFood();
+}
+
+class Order_Facade_Impl extends Order_Facade
+{
+private:
+    Waiter_Subsystem1 waiter;
+    Kitchen_Subsystem2 kitchen;
+public:
+    void orderFood()
+    {
+        cout << "A series of interdependent calls on various subsystems:\n";
+        waiter.writeOrder();
+        waiter.sendToKitchen();
+        kitchen.prepareFood();
+        kitchen.callWaiter();
+        waiter.serveCustomer();
+        kitchen.washDishes();
+    }
+};
+
+Class Client {
+  int main(int argc, char *argv[])
+    {
+    // Simple for the client
+    // no need to know the order or the
+    // dependencies among various subsystems.
+    Order_Facade facade = new Order_Facade_Impl();
+    facade.orderFood();
+    return 0;
+  }
+}
+
+/*****************/
+
+
+package structural.facade;
+public interface Hotel
+{
+    public Menus getMenus();
+}
+
+
+package structural.facade;
+public class NonVegRestaurant implements Hotel
+{
+    public Menus getMenus()
+    {
+        NonVegMenu nv = new NonVegMenu();
+        return nv;
+    }
+}
+
+package structural.facade;
+public class VegRestaurant implements Hotel
+{
+    public Menus getMenus()
+    {
+        VegMenu v = new VegMenu();
+        return v;
+    }
+}
+
+
+package structural.facade;
+public class VegNonBothRestaurant implements Hotel
+{
+    public Menus getMenus()
+    {
+        Both b = new Both();
+        return b;
+    }
+}
+
+public class HotelKeeper
+{
+    public VegMenu getVegMenu()
+    {
+        VegRestaurant v = new VegRestaurant();
+        VegMenu vegMenu = (VegMenu)v.getMenus();
+        return vegMenu;
+    }
+
+    public NonVegMenu getNonVegMenu()
+    {
+        NonVegRestaurant v = new NonVegRestaurant();
+        NonVegMenu NonvegMenu = (NonVegMenu)v.getMenus();
+        return NonvegMenu;
+    }
+
+    public Both getVegNonMenu()
+    {
+        VegNonBothRestaurant v = new VegNonBothRestaurant();
+        Both bothMenu = (Both)v.getMenus(); 
+        return bothMenu;
+    }
+}
+
+public class Client
+{
+    public static void main (String[] args)
+    {
+        HotelKeeper keeper = new HotelKeeper();
+
+        VegMenu v = keeper.getVegMenu();
+        NonVegMenu nv = keeper.getNonVegMenu();
+        Both = keeper.getVegNonMenu();
+
+    }
+}

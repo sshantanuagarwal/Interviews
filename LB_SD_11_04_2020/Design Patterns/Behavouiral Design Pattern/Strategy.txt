@@ -1,0 +1,61 @@
+Strategy Design Pattern
+
+- have different algorithms need to be applied on objects
+- algorithms are selected on runtime
+- vary independently from Client
+
+
+Implementation
+
+//Strategy interface
+public interface SortInterface{
+    sort(int[] arr);
+}
+
+public class QucikSort implements SortInterface{
+    public void sort(int[] arr){
+       // Quick sort logic
+    }
+}
+
+public class BubbleSort implements SortInterface{
+    public void sort(int[] arr){
+       // bubble sort logic
+    }
+}
+
+public abstract class Sorter{
+    private SortInterface strategy;
+
+    public void setSorter(SortInterface strategy){
+        this.strategy = strategy;
+    }
+
+    public SortInterface getSorter(){
+        return this.strategy;
+    }
+
+    public abstract void doSort(int listToSort);
+}
+
+public class MySorter extends Sorter{
+   public void doSort(int[] listToSort){
+      getSorter.sort(listToSort)
+   }
+}
+
+public class Client{
+
+   p s v m (String[] args){
+
+      int listToBeSorted={10,18,15,13,20,137};
+
+      MySorter mysorter = new MySorter();
+
+      mysorter.setSorter(new BubbleSort());
+      mysorter.doSort(listToBeSorted);
+
+      mysorter.setSorter(new QuickSort());
+      mysorter.doSort(listToBeSorted);
+   }
+}

@@ -1,0 +1,165 @@
+Oberver Design Pattern
+
+
+The Observer Pattern defines a one to many dependency between objects so that one object changes state,
+all of its dependents are notified and updated automatically.
+
+Cricket App:
+two display:
+    1. Current Score Display
+    2. Average Score Display
+
+CricketData: runs, bowls
+when ever data changes the display elements need to be change with new data
+
+
+Solutions :
+1.  Peridically the Current Score Display and Avergae Score Display takes the data from CricketData class and update themselves.
+2. Whenever the data changes , CricketData notifies the Current Score Display and Average Score Display to update themselves.
+
+
+
+The relation between subject and observer can easily be understood as an analogy to magazine subscription.
+
+1. A magazine publisher(subject) is in the business and publishes magazines (data).
+2. If you(user of data/observer) are interested in the magazine you subscribe(register), and if a new edition is published it gets delivered to you.
+3. If you unsubscribe(unregister) you stop getting new editions.
+4. Publisher doesn’t know who you are and how you use the magazine, it just delivers it to you because you are a subscriber(loose coupling).
+
+Implentation:
+
+interface Subject
+{
+    public void registerObserver(Observer o);
+    public void unregisterObserver(Observer o);
+    public void notifyObservers();
+}
+
+class CricketData implements Subject
+{
+    int runs;
+    int wickets;
+    float overs;
+
+    ArrayList<Observer> observerList;
+
+    public CricketData() {
+        observerList = new ArrayList<Observer>();
+    }
+
+    @Override
+    public void registerObserver(Observer o) {
+        observerList.add(o);
+    }
+
+    @Override
+    public void unregisterObserver(Observer o) {
+        observerList.remove(observerList.indexOf(o));
+    }
+
+    @Override
+    public void notifyObservers()
+    {
+        for (Iterator<Observer> it =
+              observerList.iterator(); it.hasNext();)
+        {
+            Observer o = it.next();
+            o.update(runs,wickets,overs);
+        }
+    }
+
+    private int getLatestRuns()
+    {
+        return 90;
+    }
+
+    private int getLatestWickets()
+    {
+        return 2;
+    }
+
+    private float getLatestOvers()
+    {
+        return (float)10.2;
+    }
+
+    public void dataChanged()
+    {
+        runs = getLatestRuns();
+        wickets = getLatestWickets();
+        overs = getLatestOvers();
+        notifyObservers();
+    }
+}
+
+
+interface Observer
+{
+    public void update(int runs, int wickets,
+                      float overs);
+}
+
+class AverageScoreDisplay implements Observer
+{
+    private float runRate;
+    private int predictedScore;
+
+    public void update(int runs, int wickets,
+                       float overs)
+    {
+        this.runRate =(float)runs/overs;
+        this.predictedScore = (int)(this.runRate * 50);
+        display();
+    }
+
+    public void display()
+    {
+        System.out.println("\nAverage Score Display: \n"
+                           + "Run Rate: " + runRate +
+                           "\nPredictedScore: " +
+                           predictedScore);
+    }
+}
+
+class CurrentScoreDisplay implements Observer
+{
+    private int runs, wickets;
+    private float overs;
+
+    public void update(int runs, int wickets,
+                       float overs)
+    {
+        this.runs = runs;
+        this.wickets = wickets;
+        this.overs = overs;
+        display();
+    }
+
+    public void display()
+    {
+        System.out.println("\nCurrent Score Display:\n"
+                           + "Runs: " + runs +
+                           "\nWickets:" + wickets +
+                           "\nOvers: " + overs );
+    }
+}
+
+class Main
+{
+    public static void main(String args[])
+    {
+        AverageScoreDisplay averageScoreDisplay = new AverageScoreDisplay();
+        CurrentScoreDisplay currentScoreDisplay = new CurrentScoreDisplay();
+
+        CricketData cricketData = new CricketData();
+
+        cricketData.registerObserver(averageScoreDisplay);
+        cricketData.registerObserver(currentScoreDisplay);
+
+        cricketData.dataChanged();
+
+        cricketData.unregisterObserver(averageScoreDisplay);
+
+        cricketData.dataChanged();
+        }
+ }

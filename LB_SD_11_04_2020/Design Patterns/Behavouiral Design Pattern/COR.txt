@@ -1,0 +1,148 @@
+
+Chain of Responsibility
+
+- communication between the objects
+- where a request from the client is passed to a chain of objects to process them
+- he object in the chain will decide themselves who will be processing the request and whether the request is required to be sent to the next object in the chain or not.
+
+
+         request
+Sender    ----->        Receiver1
+                        Receiver2
+                        Receiver3
+                        Receiver4
+
+Boradcating
+
+          request
+Sender    ----->     Receiver1
+          request
+          ----->     Receiver2
+          request
+          ----->     Receiver3
+          request
+          ----->     Receiver4
+
+
+
+COR
+
+          request                request              request
+Sender    ----->     Receiver1   --->      Receiver2  ---->     Receiver3
+
+
+Implementation
+
+interface Chain
+{
+    public abstract void setNext(Chain nextInChain);
+    public abstract void process(Number request);
+}
+
+class Number
+{
+    private int number;
+
+    public Number(int number)
+    {
+        this.number = number;
+    }
+
+    public int getNumber()
+    {
+        return number;
+    }
+
+}
+
+class NegativeProcessor implements Chain
+{
+    private Chain nextInChain;
+
+    public void setNext(Chain c)
+    {
+        nextInChain = c;
+    }
+
+    public void process(Number request)
+    {
+        if (request.getNumber() < 0)
+        {
+            System.out.println("NegativeProcessor : " + request.getNumber());
+        }
+        else
+        {
+            nextInChain.process(request);
+        }
+    }
+}
+
+class ZeroProcessor implements Chain
+{
+    private Chain nextInChain;
+
+    public void setNext(Chain c)
+    {
+        nextInChain = c;
+    }
+
+    public void process(Number request)
+    {
+        if (request.getNumber() == 0)
+        {
+            System.out.println("ZeroProcessor : " + request.getNumber());
+        }
+        else
+        {
+            nextInChain.process(request);
+        }
+    }
+}
+
+class PositiveProcessor implements Chain
+{
+    private Chain nextInChain;
+
+    public void setNext(Chain c)
+    {
+        nextInChain = c;
+    }
+
+    public void process(Number request)
+    {
+        if (request.getNumber() > 0)
+        {
+            System.out.println("PositiveProcessor : " + request.getNumber());
+        }
+        else
+        {
+            nextInChain.process(request);
+        }
+    }
+}
+
+class TestChain
+{
+    public static void main(String[] args) {
+        //configure Chain of Responsibility
+        Chain c1 = new NegativeProcessor();
+        Chain c2 = new ZeroProcessor();
+        Chain c3 = new PositiveProcessor();
+        c1.setNext(c2);
+        c2.setNext(c3);
+
+        //calling chain of responsibility
+        c1.process(new Number(90));
+        c1.process(new Number(-50));
+        c1.process(new Number(0));
+        c1.process(new Number(91));
+    }
+}
+
+c1 -> c2 -> c3
+neg   zero  pos
+--------------------
+PositiveProcessor : 90
+NegativeProcessor : -50
+ZeroProcessor : 0
+PositiveProcessor : 91

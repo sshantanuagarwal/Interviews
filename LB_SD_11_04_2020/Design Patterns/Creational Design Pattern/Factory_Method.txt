@@ -1,0 +1,115 @@
+Factory design pattern
+
+ In Factory pattern, we create object without exposing the creation logic to client and the client use the same common interface to create new type of object.
+ doesn’t have tight coupling with the class.
+
+  vehical
+    two wheeler
+    three wheeler
+
+  Factory 
+
+  client
+    if(typw ==1)
+       Vehicle = new TwoWheeler()
+    else if(type ==2)
+        Vehicle = new ThreeWheeler()
+
+
+
+National park
+Animal
+ duck
+ dogs
+ bird
+
+AnimalFactory
+ -createAnimal()
+
+RandomFactoryImpl
+RandomGeneration(){
+   createAnimal()
+}
+
+BalanceFactoryImpl
+balancedGenration(){
+   createAnimal()
+}
+
+********************
+client class{
+
+  -----------------
+   business logic
+    if(type==1)
+       createAnimal(Dog)
+    else if(type ==2)
+      createAnimal(Duck)
+    else
+
+
+  ------------------
+}
+
+
+=====================
+
+public interface Pet{
+  public string petSound();
+}
+
+public class Dog implements Pet{
+   public string petSound(){
+       return "Bow Bow .."
+   }
+}
+
+public class Cat implements Pet{
+   public string petSound(){
+       return "Meow Meow .."
+   }
+}
+
+public interface PetFactoryInterface{
+    getPet(String petType);
+}
+
+
+//Factory class
+public class PetSoundFactory implements PetFactoryInterface {
+  public Pet getPet(String petType){
+     Pet pet = null;
+
+    if("Bow".equals(petType))
+       pet = new Dog;
+    if("Meow".equals(petType))
+       pet = new Cat;
+
+    return pet;
+  }
+}
+
+public class PetRandomFactory implements PetFactoryInterface {
+  public Pet getPet(String petType){
+     Pet pet = null;
+     if(count%Rand()==0)
+       pet = new Dog;
+     else
+       pet = new Cat;
+    return pet;
+  }
+}
+
+// client class
+public class client{
+  PSVM(str args[]){
+     PetFactory petFactory = new PetRandomFactory();
+     Pet pet = petFactory.getPet("Bow");
+     s.o.pln(pet.petSound());
+  }
+
+------
+Asteroid game
+
+
+l1:

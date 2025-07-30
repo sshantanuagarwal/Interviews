@@ -1,0 +1,100 @@
+Singleton Design Pattern
+
+- restricts a class to instantiate its multiple objects
+- Class is defined in such a way that only one instance of the class
+  is created in the complete execution of a program or project
+- Need global point of access
+
+Implementation
+
+ 1. only one instance
+ 2. globally accessible
+
+
+ Two types of instantaition
+1. Lazy :  class in initialized only when it is required
+2. Early : class is initialized whether it is to be used or not
+
+
+Early Instatiation
+
+public class Singleton{
+   private static Singleton instance  = new Singleton();
+   private Singleton(){}
+
+   public static Singleton getInstance(){
+     return instance;
+ }
+}
+
+Lazy Instatiation
+public class Singleton{
+  private static Singleton instance;
+
+  private Singleton(){
+  }
+
+  public static Singleton getInstance(){
+     if(instance == null)
+         instance = new Singleton();
+
+   return instance;
+  }
+}
+
+
+Cons :  not thread safe
+
+2. using syncronization
+
+public class Singleton{
+  private static Singleton instance;
+
+  private Singleton(){
+  }
+
+  public synchronized static Singleton getInstance(){
+     if(instance == null)
+         instance = new Singleton();
+
+   return instance;
+  }
+}
+
+This is performance degradable as every thread hit the getInstance()
+
+
+public class Singleton{
+  private static Singleton instance;
+
+  private Singleton(){
+  }
+
+  public static Singleton getInstance(){
+   synchronized(Singleton.class){
+     if(instance == null)
+             instance = new Singleton();
+    }
+   return instance;
+  }
+}
+
+
+Doblue check locking
+
+public class Singleton{
+  private static Singleton instance;
+
+  private Singleton(){
+  }
+
+  public static Singleton getInstance(){
+       if(instance == null){
+         synchronized(Singleton.class){
+           if(instance == null)
+             instance = new Singleton();
+         }
+      return instance;
+    }
+  }
+}

@@ -1,0 +1,146 @@
+Parking Lot System
+
+Requirements
+
+1. The parking lot should have multiple floors where customers can park their cars.
+2. multiple entry and exit points.
+3. Customers can collect a parking ticket from the entry points and can pay the parking fee at the exit points on their way out.
+4. Customers can pay the tickets at the automated exit panel or to the parking attendant.
+5. Customers can pay via both cash and credit cards.
+6. The system should not allow more vehicles than the maximum capacity of the parking lot.
+7. Each parking floor will have many parking spots. The system should support multiple types of parking spots such as small (bicycle/motorcycle), medium(cars), Large(suv), Handicapped etc.
+8. The Parking lot should have some parking spots specified for electric cars. These spots should have an electric panel through which customers can pay and charge their vehicles.
+9. different types of vehicles like car, truck, van, motorcycle, etc.
+10. System should assign a parking spot base on the vehical type.
+11. The system should support a per-hour parking fee model. For example, customers have to pay $4 for the first hour, $3.5 for the second and third hours, and $2.5 for all the remaining hours.
+
+
+Actors:
+1. Admin
+2. system
+3. customer
+4. parking attendent
+
+Usecases:
+1. Add/Remove/Edit parking floor
+2. Add/Remove/Edit parking spot
+3. Take ticket
+4. Scan ticket:
+5. Collect payment
+6. Add/Modify parking rate
+7. Add/Remove payment method
+8. Add/Remove type of vehical
+
+**********************************************************************
+Account
+   -userName: string
+   -password: string
+   -status: AccountStatus
+   -name
+   -phoneNo
+   -email
+
+Admin  <Acount>
+   --addParkingFloor();
+   --removeParkingFloor();
+   --editParkingFloor();
+
+PakingAttendent  <Acount>
+    --processTicket()
+    --collectPayment()
+
+************************************************************************
+
+ParkingLot (System)
+   -id :string
+   -address:
+   --addParkingFloor();
+   --addEntryPanel()
+   --getParkingTicket();
+   --isFull();
+
+ParkingFloor
+   -id:
+   --getFreeSpots(ParkingSpotType)
+
+ParkingSpot
+   -id:string
+   -status: SpotStatus
+   -type: ParkingSpotType
+   --isFree()
+
+SmallParkingSpot   <ParkingSpot>
+
+LargeParkingSpot   <ParkingSpot>
+
+MediumParkingSpot  <ParkingSpot>
+
+ElectricParkingSpot  <ParkingSpot>
+
+HandicappedParkingSpot   <ParkingSpot>
+
+ParkingRate
+  -hourNumber: int
+  -rate : Double
+  -- calcaluteAmount()
+
+
+ParkingTicket
+  -tktNo:string
+  -issuedAt:DateTime
+  -collectedAt:DateTime
+  -amount:
+  -status:ParkingTickeStatus
+************************************************************************
+
+Vehical
+   -licenseNumber: string
+   -type: VehicleType
+   --assignTicket()
+
+Car  <Vehical>
+
+Truck  <Vehical>
+
+Electric <Vehical>
+
+Van     <Vehical>
+
+MotoBike  <Vehical>
+
+************************************************
+
+EntryPanel
+   -id:string
+   --printTicket();
+   --getVehicalType();
+   
+ExitPanel
+    -id:string
+    --scanTicket();
+    --processPayment();
+
+ParkingAttedantProtal
+    -scanTicket();
+    -processPayment();
+
+ElectriPanel
+    - mintuesUsed:int
+    - startTime:DateTime
+    --collectPayment();
+
+************************************************
+
+Payment
+   -trasactionId: long
+   -creationDate: Date
+   -amount: double
+   -status: PaymentStatus
+   --initaiteTransaction();
+
+CreditCardTransaction <Payment>
+  -nameOnCard :string
+  -cardNo :long
+
+CashTransaction <Payment>
+  -cashTaken: double

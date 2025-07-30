@@ -1,0 +1,67 @@
+Template Method Design Pattern
+
+- defines the steps of an algorithm
+- Implementation of these steps can be deferred to sub classes
+- The overall structure and sequence of the algorithm is preserved by the parent class.
+
+Implementation
+
+public abstract class Lunch{
+
+   //template Method
+   public void prepareLunch(){
+      prepareIngredients();
+      cooking();
+      eating()
+      cleaning();
+   }
+
+   public abstract void prepareIngredients();
+
+   pubic abstract void cooking();
+
+   public void eating(){
+        S.o.ptlb("I am eating");
+   }
+
+   public abstract void cleaning();
+}
+
+public class McDonaldMeal extends Lunch{
+    public void prepareIngredients(){
+       S.o.p.ln("chicken onion and fries");
+    }
+
+    public void cooking(){
+     S.o.p.ln("cooking McDonald Meal");
+    }
+
+    public void cleaning(){
+      S.o.p.ln("Cleaing plates for McDonald");
+    }
+}
+
+public class KFCMeal extends Lunch{
+    public void prepareIngredients(){
+       S.o.p.ln("burger cold drink and fries");
+    }
+
+    public void cooking(){
+     S.o.p.ln("cooking KFC Meal");
+    }
+
+    public void cleaning(){
+      S.o.p.ln("Cleaing plates for KFC");
+    }
+}
+
+public class Client{
+
+   psvm(String args[]){
+     Lunch meal1 = new McDonaldMeal();
+     meal1.preapreLunch();
+
+     Lunch meal2 = new KfcMeal();
+     meal2.preapreLunch();
+   }
+}

@@ -1,0 +1,83 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww25780\viewh13960\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs30 \cf0 \
+Public class ThreadPoolClass \{\
+	private nThread;\
+	private LinkedBlockingQueue queue;\
+	list< Task > listThread;\
+	\
+	ThreadPoolClass( int n ) \{\
+		this.nThread = n;\
+		this.queue = new LinkedBlockingQueue();\
+\
+		for( int I = 0; I< n; I ++ ) \{ \
+			Thread newTask = new Thread() ;\
+			listThread.add( newTask );\
+		\}		\
+	\}\
+	\
+	void execute( Runnable task ) \{\
+		synchronized( this ) \{\
+			queue.add( task );\
+			queue.notify();	\
+		\}\
+	\}\
+\}\
+\
+\
+Class Poller extends Thread \{\
+\
+	public void run() \{\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+		int numTask = list.size();\
+		int threadPoolSize = 3;\
+		ThreadClass tc = new ThreadClass( threadPoolSize );\
+		queue = tc.queue;\
+		\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 		while True \{\
+			while( !queue.isFull() ) \{\
+				queue.add( task );\
+			\}\
+			if( queue.isFull() ) \{\
+				queue.wait();\
+			\}	\
+			task = queue.poll();\
+			task.run();\
+		\}\
+	\}\
+\}\
+\
+Public Class TaskAssignment \{\
+	List < Task >  taskList;\
+\
+	TaskAssignment( ArrayList<Task> list ) \{\
+		this.taskList = new ArrayList<Task>();;\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 		int numTask = list.size();\
+		for( int i = 0; I< numTask; I++ ) \{\
+			this.taskList.add( list[ I ] );\
+		\}	\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+	\}\
+	\
+	void poller( ) \{ \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 		int I = 0;\
+		while( True ) \{\
+			\
+		while( !tc.queue.isFull() ) \{\
+			tc.execute( taskList[ I ] );\
+		\}\
+		\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 	\}\
+\}\
+}

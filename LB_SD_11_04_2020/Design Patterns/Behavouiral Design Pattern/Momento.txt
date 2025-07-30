@@ -1,0 +1,92 @@
+Memento design pattern
+
+- Memento pattern is used to restore state of an object to a previous state. As your application is progressing, you may want to save checkpoints in your application and restore back to those checkpoints later.
+
+- provide an ability to restore an object to its previous state (rollback).
+- implemented using two objects: caretaker and originator
+- caretaker performs some action on originator , also wants to undo the change
+
+Example:
+- online web form information
+- user allows to make change in the form and if some mistake happens , put back in the original form values
+
+Implementation:
+
+public class Momento{
+    private String state;
+
+    public Memento(String stateToSave)
+    {
+       state = stateToSave;
+    }
+
+    public String getSavedState(){
+       return state;
+    }
+}
+
+public class Caretaker{
+    private List<Memento> savedState = new ArrayList<Memento>();
+
+    public void addMemento(Memento m){
+      savedStates.add(m);
+    }
+
+    public Memento getMemento(int index){
+      return savedStates.get(index);
+    }
+}
+
+class originator{
+    private String state;
+
+    public void setState(String state){
+      s.o.p.ln("Setting state");
+      this.state = state;
+    }
+
+    public Memento saveToMemento(){
+       s.o.p.ln("saving to memento);
+       return new Memento(state);
+    }
+
+    public void restoreFromMemento(Memento m){
+        state = m.getSavedState();
+        S.o.p("Restoring state from Memento");
+    }
+}
+
+public class Client{
+  p s v m (String args[]){
+     Caretaker care = new Caretaker();
+     Originator org = new Originator();
+
+       org.setState("State1");
+       org.setState("State2");
+
+        caretaker.addMemento(org.saveToMemento());
+
+        org.setState("State3");
+        caretaker.addMemento(org.saveToMemento());
+        org.restoreFromMemento(caretaker.getMemento(1));
+  }
+}
+
+
+Org -> State1
+
+Org -> State2
+    MemObj1 -> State2
+    List<MemObj1>
+
+Org -> State3
+    MemObj2 -> State3
+    List<MemObj1,MemObj2>
+
+Org -> State4
+    List<>(0) -> MemObj1
+    MemObj1->State2
+    Org->State2
+
+Org -> State2     
+-----------------------------

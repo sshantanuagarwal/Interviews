@@ -1,0 +1,80 @@
+Proxy Design Pattern
+
+- Proxy : in place of / in behalf of
+
+- a proxy object satisfy the request in place of original object
+
+- needed when we need to represents complex objects with simpler object(proxy)
+
+- surrogate design Pattern
+
+- “Controls and manage access to the object they are protecting“.
+
+- Proxy pattern is used when we need to create a wrapper to cover the main object’s complexity from the client.
+
+
+
+
+public interface Internet
+{
+    public void connectTo(String serverhost) throws Exception;
+}
+
+
+
+public class RealInternet implements Internet
+{
+    @Override
+    public void connectTo(String serverhost)
+    {
+        System.out.println("Connecting to "+ serverhost);
+    }
+}
+
+
+
+public class ProxyInternet implements Internet
+{
+    private Internet internet = new RealInternet();
+    private static List<String> bannedSites;
+
+    static
+    {
+        bannedSites = new ArrayList<String>();
+        bannedSites.add("abc.com");
+        bannedSites.add("def.com");
+        bannedSites.add("ijk.com");
+        bannedSites.add("lnm.com");
+    }
+
+    @Override
+    public void connectTo(String serverhost) throws Exception
+    {
+        if(bannedSites.contains(serverhost.toLowerCase()))
+        {
+            throw new Exception("Access Denied");
+        }
+
+        internet.connectTo(serverhost);
+    }
+
+}
+
+
+
+public class Client
+{
+    public static void main (String[] args)
+    {
+        Internet internet = new ProxyInternet();
+        try
+        {
+            internet.connectTo("geeksforgeeks.org");
+            internet.connectTo("abc.com");
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
+}

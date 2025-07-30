@@ -1,0 +1,185 @@
+Flyweight Design Pattern
+
+- help to reduce the object count
+- used when we need to create a large number of similar objects
+- objects is that they are immutable
+- a HashMap that stores reference to the object which have already been created, every object is associated with a key
+
+- As much as possible reduction used memory wasted for servicing many similar objects.
+
+- Replacing so-called heavy objects on light objects.
+
+- The use of object sharing for effective management of many objects, i.e. we do not create every object from the beginning, we only base on already created objects thanks to this we increase the application speed.
+
+- You create an application that uses a large number of repeating objects.
+
+- Your objects are expensive to store.
+
+- The state of the object you create can be saved outside it, eg when you have 100 objects and if in each is color field, then you can solve it in such a way that you create one object (or more if there are four types of colors in it) from zero and color data are shared with the remaining 99 objects, this is a great saving in memory and performance, because we do not have to create these objects from scratch each time.
+
+
+Example
+text editor
+
+character class
+  - name
+  - font
+  - size
+  - position {row,coloumn}
+
+  Intrinsic State
+    - class attributes can be shared among the different objects as they are similar to each other
+    - name, font ,size
+
+  Extrinsic State
+    - class attributes can’t be shared among objects.
+    - position
+
+FlyWeight
+Implementation:
+In the game of Counter Strike we have to implementation of creation of Terrorists and Counter Terrorists.
+ Whenever a player asks for a weapon we assign him the asked weapon.
+ In the mission, terrorist’s task is to plant a bomb while the counter terrorists have to diffuse the bomb.
+
+ Intrinsic State : Here ‘task’ is an intrinsic state for both types of players, since this is always same for T’s/CT’s. We can have some other states like their color or any other properties which are similar for all the Terrorists/Counter Terrorists in their respective Terrorists/Counter Terrorists class.
+
+ Extrinsic State : Weapon is an extrinsic state since each player can carry any weapon of his/her choice. Weapon need to be passed as a parameter by the client itself.
+
+
+interface Player
+{
+    public void assignWeapon(String weapon);
+    public void mission();
+}
+
+class Terrorist implements Player
+{
+    // Intrinsic Attribute
+    private final String TASK;
+
+    // Extrinsic Attribute
+    private String weapon;
+
+    public Terrorist()
+    {
+        TASK = "PLANT A BOMB";
+    }
+    public void assignWeapon(String weapon)
+    {
+        // Assign a weapon
+        this.weapon = weapon;
+    }
+    public void mission()
+    {
+        //Work on the Mission
+        System.out.println("Terrorist with weapon "
+                           + weapon + "|" + " Task is " + TASK);
+    }
+}
+
+class CounterTerrorist implements Player
+{
+    // Intrinsic Attribute
+    private final String TASK;
+
+    // Extrinsic Attribute
+    private String weapon;
+
+    public CounterTerrorist()
+    {
+        TASK = "DIFFUSE BOMB";
+    }
+    public void assignWeapon(String weapon)
+    {
+        this.weapon = weapon;
+    }
+    public void mission()
+    {
+        System.out.println("Counter Terrorist with weapon "
+                           + weapon + "|" + " Task is " + TASK);
+    }
+}
+
+class PlayerFactory
+{
+    /* HashMap stores the reference to the object
+       of Terrorist(TS) or CounterTerrorist(CT).  */
+    private static HashMap <String, Player> hm =
+                         new HashMap<String, Player>();
+
+    // Method to get a player
+    public static Player getPlayer(String type)
+    {
+        Player p = null;
+
+        /* If an object for TS or CT has already been
+           created simply return its reference */
+        if (hm.containsKey(type))
+                p = hm.get(type);
+        else
+        {
+            /* create an object of TS/CT  */
+            switch(type)
+            {
+            case "Terrorist":
+                System.out.println("Terrorist Created");
+                p = new Terrorist();
+                break;
+            case "CounterTerrorist":
+                System.out.println("Counter Terrorist Created");
+                p = new CounterTerrorist();
+                break;
+            default :
+                System.out.println("Unreachable code!");
+            }
+
+            // Once created insert it into the HashMap
+            hm.put(type, p);
+        }
+        return p;
+    }
+}
+
+
+public class CounterStrike
+{
+    private static String[] playerType =
+                    {"Terrorist", "CounterTerrorist"};
+
+    private static String[] weapons =
+      {"AK-47", "Maverick", "Gut Knife", "Desert Eagle"};
+
+
+    public static void main(String args[])
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            Player p = PlayerFactory.getPlayer(getRandPlayerType());
+
+            p.assignWeapon(getRandWeapon());
+
+            p.mission();
+        }
+    }
+
+
+
+   public static String getRandPlayerType()
+    {
+        Random r = new Random();
+
+        int randInt = r.nextInt(playerType.length);
+
+        return playerType[randInt];
+    }
+
+    public static String getRandWeapon()
+    {
+        Random r = new Random();
+
+        int randInt = r.nextInt(weapons.length);
+
+        return weapons[randInt];
+    }
+
+}

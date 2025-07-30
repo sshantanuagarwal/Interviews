@@ -1,0 +1,163 @@
+State Design Pattern
+
+- Allows object to behave differently depending on internal state.
+- use if-else condition block to perform different actions based on the state.
+- defines a common interface for all  concrete states.
+
+Example:
+Simple media player
+- play button which could pause and restart the music.
+
+Mobile phone alert
+- With respect to alerts, a mobile can be in different states.
+- For example, vibration and silent.
+- Based on this alert state, behavior of the mobile changes when an alert is to be done.
+
+
+public interface State {
+   String releaseButton();
+   String pressButton();
+}
+
+public class StartingState implements State {
+    private final Player player;
+
+    public JumpingState(Player player) {
+        this.player = player;
+    }
+
+    @Override
+    public String pressButton() {
+      player.setState(player.getInAirState());
+        return "You just jumped, but you're back on the ground";
+    }
+}
+
+public class JumpingState implements State {
+    private final Player player;
+
+    public JumpingState(Player player) {
+        this.player = player;
+    }
+
+    @Override
+    public String releaseButton() {
+      player.setState(player.getOnGroundState());
+        return "You just jumped, but you're back on the ground";
+    }
+}
+
+public class OnGroundState implements State {
+    private final Player player;
+
+    public OnGroundState(Player player) {
+        this.player = player;
+    }
+
+    @Override
+    public String pressButton() {
+      player.setState(player.getInAirState());
+        return "You're in the air!";
+    }
+}
+
+public class Player {
+   private State state;
+
+   public Player() {
+      State state = new StartingState();
+   }
+
+   public void setState(State state){
+      this.state = state;
+   }
+
+   public State getState(){
+      return state;
+   }
+}
+
+class Client{
+
+
+  Player player = new Player();
+
+  OnGroundState onGround = new OnGroundState();
+  onGround.pressButton(player);
+  System.out.println(player.getState());
+
+
+  InAirState inAir = new InAirState();
+  inAir.releaseButton(player);
+  System.out.println(player.getState());
+
+}
+
+=> "You're in the air!"
+=> "You just jumped, but you're back on the ground"
+
+interface MobileAlertState
+{
+    public void alert(AlertStateContext ctx);
+}
+
+class AlertStateContext
+{
+    private MobileAlertState currentState;
+
+    public AlertStateContext()
+    {
+        currentState = new Vibration();
+    }
+
+    public void setState(MobileAlertState state)
+    {
+        currentState = state;
+    }
+
+    public void alert()
+    {
+        currentState.alert(this);
+    }
+}
+
+class Vibration implements MobileAlertState
+{
+    @Override
+    public void alert(AlertStateContext ctx)
+    {
+         System.out.println("vibration...");
+    }
+
+}
+
+class Silent implements MobileAlertState
+{
+    @Override
+    public void alert(AlertStateContext ctx)
+    {
+        System.out.println("silent...");
+    }
+
+}
+
+
+class StatePattern
+{
+    public static void main(String[] args)
+    {
+        AlertStateContext stateContext = new AlertStateContext();
+        stateContext.alert();
+        stateContext.alert();
+        stateContext.setState(new Silent());
+        stateContext.alert();
+        stateContext.alert();
+        stateContext.alert();
+    }
+}
+
+vibration...
+vibration...
+silent...
+silent...
+silent...

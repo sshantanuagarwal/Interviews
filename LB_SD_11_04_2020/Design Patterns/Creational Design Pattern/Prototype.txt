@@ -1,0 +1,153 @@
+Prototype Design Pattern
+
+- use clonning and modify the cloned object based on the requirement
+- hide the complexity of making new instances from the client
+- The concept is to copy an existing object rather than creating a new instance from scratch.
+- The existing object acts as a prototype and contains the state of the object
+
+
+cloning
+  - Shallow
+  - Deep
+
+
+  1) Prototype : This is the prototype of actual object.
+
+  2) Prototype registry : This is used as registry service to have all prototypes accessible using simple string parameters.
+
+  3) Client : Client will be responsible for using registry service to access prototype instances.
+
+----------------------
+
+nd example
+
+public Interface Animal{
+    public Animal clone();
+}
+
+public class Sheep extends Animal{
+  public Animal clone(){
+          Animal clonedAnimal = null;
+
+          try{
+             clonedAnimal = (Animal)super.clone();
+             clonedAnimal.setdescription(description);
+             clonedAnimal.setNumberOfLegs(noLegs);
+             clonedAnimal.setName(name);
+          }
+          catch(){
+          }
+          return clonedAnimal;
+  }
+}
+
+public class Chichken extends Animal{
+  public Animal clone(){
+          Animal clonedAnimal = null;
+
+          try{
+             clonedAnimal = (Animal)super.clone();
+             clonedAnimal.setdescription(description);
+             clonedAnimal.setNumberOfLegs(noLegs);
+             clonedAnimal.setName(name);
+          }
+          catch(){
+          }
+          return clonedAnimal;
+  }
+}
+
+public class AnimalCreator{
+  public Animal retriveAnimal(String KindOfAnimal){
+     if("chicken".euqals(kindOfAnimal))
+        return (Animal)Chicken.clone();
+    elseif (if("Sheep".euals(kindOfAnimal))
+       return (Animal)Sheep.clone();
+  }
+}
+
+--------------------------------------------
+
+
+abstract class Color implements Cloneable
+{
+
+    protected String colorName;
+
+    abstract void addColor();
+
+    public Object clone()
+    {
+        Object clone = null;
+        try
+        {
+            clone = super.clone();
+        }
+        catch (CloneNotSupportedException e)
+        {
+            e.printStackTrace();
+        }
+        return clone;
+    }
+}
+
+class blueColor extends Color
+{
+    public blueColor()
+    {
+        this.colorName = "blue";
+    }
+
+    @Override
+    void addColor()
+    {
+        System.out.println("Blue color added");
+    }
+
+}
+
+class blackColor extends Color{
+
+    public blackColor()
+    {
+        this.colorName = "black";
+    }
+
+    @Override
+    void addColor()
+    {
+        System.out.println("Black color added");
+    }
+}
+
+class ColorStore {
+
+    private static Map<String, Color> colorMap = new HashMap<String, Color>();
+
+    static
+    {
+        colorMap.put("blue", new blueColor());
+        colorMap.put("black", new blackColor());
+    }
+
+    public static Color getColor(String colorName)
+    {
+        return (Color) colorMap.get(colorName).clone();
+    }
+}
+
+// Driver class
+class Prototype
+{
+    public static void main (String[] args)
+    {
+        ColorStore.getColor("blue").addColor();
+        ColorStore.getColor("black").addColor();
+        ColorStore.getColor("black").addColor();
+        ColorStore.getColor("blue").addColor();
+    }
+}
+
+
+
+--------------------------------
