@@ -6,7 +6,7 @@ import json
 import csv
 from pathlib import Path
 
-from .models import Customer, Transaction, CostSummary, CustomerCostReport, TransactionType, BillingCycle
+from models import Customer, Transaction, CostSummary, CustomerCostReport, TransactionType, BillingCycle
 
 
 class CustomerRepository(ABC):

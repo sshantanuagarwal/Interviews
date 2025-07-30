@@ -4,11 +4,8 @@ from decimal import Decimal
 from collections import defaultdict
 import calendar
 
-from .models import (
-    Customer, Transaction, CostSummary, CustomerCostReport,
-    TransactionType, BillingCycle
-)
-from .repository import CustomerRepository, TransactionRepository
+from models import Customer, Transaction, CostSummary, CustomerCostReport,    TransactionType, BillingCycle
+from repository import CustomerRepository, TransactionRepository
 
 
 class CostCalculationService:

@@ -3,8 +3,8 @@ from datetime import datetime
 from decimal import Decimal
 from tabulate import tabulate
 
-from .models import CustomerCostReport, CostSummary, TransactionType
-from .services import CostAnalysisService
+from models import CustomerCostReport, CostSummary, TransactionType
+from services import CostAnalysisService
 
 
 class CostReportPresenter:
