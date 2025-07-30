@@ -9,8 +9,9 @@ function-based routing with middleware support.
 import json
 import time
 from typing import Dict, Any
-
-from models import MiddlewareRouter, MiddlewareFactory, MiddlewareComposer, Request, Response, HttpMethod, HttpStatus, RouterConfig
+from router import MiddlewareRouter
+from middleware import MiddlewareFactory, MiddlewareComposer
+from models import Request, Response, HttpMethod, HttpStatus, RouterConfig
 
 
 def create_sample_handlers():

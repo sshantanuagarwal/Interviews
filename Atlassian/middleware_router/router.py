@@ -5,10 +5,7 @@ from urllib.parse import urlparse, parse_qs
 import time
 import logging
 
-from .models import (
-    Request, Response, Route, MiddlewareContext, 
-    HttpMethod, HttpStatus, RouterConfig
-)
+from models import Request, Response, Route, MiddlewareContext, HttpMethod, HttpStatus, RouterConfig
 
 
 class PathMatcher:

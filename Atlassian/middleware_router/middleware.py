@@ -6,9 +6,7 @@ from datetime import datetime, timedelta
 from collections import defaultdict
 import logging
 
-from .models import (
-    Request, Response, MiddlewareContext, HttpStatus, HttpMethod
-)
+from models import Request, Response, MiddlewareContext, HttpStatus, HttpMethod
 
 
 class MiddlewareFactory:
